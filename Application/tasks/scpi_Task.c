@@ -33,18 +33,14 @@ osStatus_t ParserTaskInit(void) {
 }
 
 osStatus_t ParserTaskLoop(void) {
-  /*
-  osMessageQueueGet(COMRxQueueHandle, &rxMsg, 0, osWaitForever);
-  rxMsg.type = COM_TX_MESSAGE;
-  osMessageQueuePut(COMEventQueueHandle, &rxMsg, 0, osWaitForever);
-  */
+
   osMessageQueueGet(COMRxQueueHandle, &rxMsg, 0, osWaitForever);
   volatile scpi_bool_t result =
-      SCPI_Input(&scpi_context, rxMsg.payload, (int)rxMsg.length);
+      SCPI_Parse(&scpi_context, rxMsg.payload, (int)rxMsg.length);
   if (result == 0) {
     return osError;
   }
-  //osDelay(1);
+  // osDelay(1);
   return osOK;
 }
 
