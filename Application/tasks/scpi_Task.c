@@ -44,7 +44,7 @@ osStatus_t ParserTaskLoop(void) {
   if (result == 0) {
     return osError;
   }
-  osDelay(1);
+  //osDelay(1);
   return osOK;
 }
 

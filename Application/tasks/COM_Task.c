@@ -39,7 +39,7 @@ osStatus_t COMTaskLoop(void) {
     break;
   }
 
-  osDelay(1);
+  //osDelay(1);
   return osOK;
 }
 
