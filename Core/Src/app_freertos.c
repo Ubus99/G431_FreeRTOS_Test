@@ -26,25 +26,13 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "COM_Task.h"
+#include "osDefinitions.h"
+#include "scpi_Task.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN PTD */
-
-#define COM_EVENT_PAYLOAD_MAX_LENGTH 32
-
-typedef enum {
-  COM_RX_COMPLETE = 0,
-  COM_RX_MESSAGE,
-  COM_TX_MESSAGE
-} COMEventType_t;
-
-typedef struct {
-  COMEventType_t type;
-  char           payload[COM_EVENT_PAYLOAD_MAX_LENGTH];
-  uint16_t       length;
-} COMEvent_t;
 
 /* USER CODE END PTD */
 
@@ -60,9 +48,6 @@ typedef struct {
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN Variables */
-
-// Hardware Rx Buffer
-static COMEvent_t hardwareEvent = {.type = COM_RX_COMPLETE};
 
 /* USER CODE END Variables */
 /* Definitions for COMTask */
@@ -175,35 +160,11 @@ void MX_FREERTOS_Init(void) {
 /* USER CODE END Header_StartCOMTask */
 void StartCOMTask(void *argument) {
   /* USER CODE BEGIN StartCOMTask */
-  COMEvent_t event;
-
-  // kick off UART loop
-  HAL_UARTEx_ReceiveToIdle_IT(
-      &hlpuart1,
-      (uint8_t *)hardwareEvent.payload,
-      COM_EVENT_PAYLOAD_MAX_LENGTH);
+  COMTaskInit();
 
   /* Infinite loop */
   for (;;) {
-
-    osMessageQueueGet(COMEventQueueHandle, &event, 0, osWaitForever);
-    switch (event.type) {
-    case COM_RX_COMPLETE:
-      // act as gateway or watchdog
-      event.type = COM_RX_MESSAGE;
-      osMessageQueuePut(COMRxQueueHandle, &event, 0, osWaitForever);
-      break;
-
-    case COM_TX_MESSAGE:
-      HAL_UART_Transmit(
-          &hlpuart1, (uint8_t *)event.payload, event.length, HAL_MAX_DELAY);
-      break;
-
-    default:
-      break;
-    }
-
-    osDelay(1);
+    COMTaskLoop();
   }
   /* USER CODE END StartCOMTask */
 }
@@ -217,32 +178,15 @@ void StartCOMTask(void *argument) {
 /* USER CODE END Header_StartParserTask */
 void StartParserTask(void *argument) {
   /* USER CODE BEGIN StartParserTask */
-  COMEvent_t rxMsg;
+  ParserTaskInit();
   /* Infinite loop */
   for (;;) {
-    osMessageQueueGet(COMRxQueueHandle, &rxMsg, 0, osWaitForever);
-    rxMsg.type = COM_TX_MESSAGE;
-    osMessageQueuePut(COMEventQueueHandle, &rxMsg, 0, osWaitForever);
-    osDelay(1);
+    ParserTaskLoop();
   }
   /* USER CODE END StartParserTask */
 }
 
 /* Private application code --------------------------------------------------*/
 /* USER CODE BEGIN Application */
-
-void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t size) {
-  hardwareEvent.length = size;
-  osMessageQueuePut(
-      COMEventQueueHandle,
-      &hardwareEvent,
-      0,
-      0); // pass raw message to IO task for processing, it will
-          // pass them on appropriately
-  HAL_UARTEx_ReceiveToIdle_IT(
-      &hlpuart1,
-      (uint8_t *)hardwareEvent.payload,
-      COM_EVENT_PAYLOAD_MAX_LENGTH); // rearm UART
-}
 
 /* USER CODE END Application */
