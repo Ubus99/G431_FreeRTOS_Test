@@ -1,0 +1,31 @@
+@startuml
+participant "Producer Task"  as Prod
+queue       "IOEventQueue"   as EvQ
+participant "IOTask"         as IOTask
+participant "Peripheral / ISR" as HW
+queue       "RxQueue"        as RxQ
+participant "Consumer Task"  as Cons
+
+== Startup ==
+IOTask -> HW    : start_poll(buf)
+note right of HW : transfer armed,\nruns until complete
+
+loop IOTask main loop
+    IOTask -> EvQ : get()  [blocks]
+
+    alt RX_EVENT (posted by ISR on completion)
+        HW    -> EvQ    : put(IOMsg{RX_EVENT})
+        EvQ   -> IOTask : [wakes]
+        IOTask -> IOTask : copy buf -> IOMsg.data
+        note right of IOTask : copy only —\nno separate "read" step,\nbuf already holds the data
+        IOTask -> HW    : start_poll(buf)
+        note right of HW : rearmed only after\nthe copy completed
+        IOTask -> RxQ   : put(IOMsg{RX_DATA})
+        RxQ   -> Cons   : get() [wakes]
+    else TX_REQUEST (posted by any producer task)
+        Prod  -> EvQ    : put(IOMsg{TX_REQUEST, data})
+        EvQ   -> IOTask : [wakes]
+        IOTask -> HW    : hw_send(data)
+    end
+end
+@enduml
