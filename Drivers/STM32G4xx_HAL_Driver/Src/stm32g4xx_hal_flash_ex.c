@@ -453,7 +453,7 @@ void HAL_FLASHEx_OBGetConfig(FLASH_OBProgramInitTypeDef *pOBInit)
   *            @arg FLASH_BANK_1: Bank1 to be protected
   *            @arg FLASH_BANK_2: Bank2 to be protected (*)
   *            @arg FLASH_BANK_BOTH: Bank1 and Bank2 to be protected (*)
-  * @note   (*) availability Depends on devices
+  * @note   (*) availability depends on devices
   * @retval HAL Status
   */
 HAL_StatusTypeDef HAL_FLASHEx_EnableSecMemProtection(uint32_t Bank)
@@ -531,7 +531,7 @@ void HAL_FLASHEx_DisableDebugger(void)
   *            @arg FLASH_BANK_1: Bank1 to be erased
   *            @arg FLASH_BANK_2: Bank2 to be erased (*)
   *            @arg FLASH_BANK_BOTH: Bank1 and Bank2 to be erased (*)
-  * @note   (*) availability Depends on devices
+  * @note   (*) availability depends on devices
   * @retval None
   */
 static void FLASH_MassErase(uint32_t Banks)
@@ -576,7 +576,7 @@ static void FLASH_MassErase(uint32_t Banks)
   *         This parameter can be one of the following values:
   *            @arg FLASH_BANK_1: Page in bank 1 to be erased
   *            @arg FLASH_BANK_2: Page in bank 2 to be erased (*)
-  * @note   (*) availability Depends on devices
+  * @note   (*) availability depends on devices
   * @retval None
   */
 void FLASH_PageErase(uint32_t Page, uint32_t Banks)
@@ -664,7 +664,7 @@ void FLASH_FlushCaches(void)
   *            @arg OB_WRPAREA_BANK1_AREAB: Flash Bank 1 Area B
   *            @arg OB_WRPAREA_BANK2_AREAA: Flash Bank 2 Area A (*)
   *            @arg OB_WRPAREA_BANK2_AREAB: Flash Bank 2 Area B (*)
-  * @note   (*) availability Depends on devices
+  * @note   (*) availability depends on devices
   * @param  WRPStartOffset specifies the start page of the write protected area.
   *         This parameter can be page number between 0 and (max number of pages in the bank - 1).
   * @param  WRDPEndOffset specifies the end page of the write protected area.
@@ -780,7 +780,7 @@ static HAL_StatusTypeDef FLASH_OB_RDPConfig(uint32_t RDPLevel)
   *         @ref FLASH_OB_USER_SRAM_PE, @ref FLASH_OB_USER_CCMSRAM_RST,
   *         @ref FLASH_OB_USER_nSWBOOT0, @ref FLASH_OB_USER_nBOOT0,
   *         @ref FLASH_OB_USER_NRST_MODE, @ref FLASH_OB_USER_INTERNAL_RESET_HOLDER
-  * @note   (*) availability Depends on devices
+  * @note   (*) availability depends on devices
   * @retval HAL_Status
   */
 static HAL_StatusTypeDef FLASH_OB_UserConfig(uint32_t UserType, uint32_t UserConfig)
@@ -992,7 +992,7 @@ static HAL_StatusTypeDef FLASH_OB_UserConfig(uint32_t UserType, uint32_t UserCon
   * @param  PCROPConfig specifies the configuration (Bank to be configured and PCROP_RDP option).
   *         This parameter must be a combination of FLASH_BANK_1 or FLASH_BANK_2 (*)
   *         with OB_PCROP_RDP_NOT_ERASE or OB_PCROP_RDP_ERASE.
-  * @note   (*) availability Depends on devices
+  * @note   (*) availability depends on devices
   * @param  PCROPStartAddr specifies the start address of the Proprietary code readout protection.
   *         This parameter can be an address between begin and end of the bank.
   * @param  PCROPEndAddr specifies the end address of the Proprietary code readout protection.
@@ -1111,7 +1111,7 @@ static HAL_StatusTypeDef FLASH_OB_PCROPConfig(uint32_t PCROPConfig, uint32_t PCR
   *          This parameter can be one of the following values:
   *            @arg FLASH_BANK_1: Securable memory in Bank1 to be configured
   *            @arg FLASH_BANK_2: Securable memory in Bank2 to be configured (*)
-  * @note   (*) availability Depends on devices
+  * @note   (*) availability depends on devices
   * @param  SecSize specifies the number of pages of the Securable memory area,
   *         starting from first page of the bank.
   *         This parameter can be page number between 0 and (max number of pages in the bank - 1)
@@ -1200,7 +1200,7 @@ static HAL_StatusTypeDef FLASH_OB_BootLockConfig(uint32_t BootLockConfig)
   *          This parameter can be one of the following values:
   *            @arg FLASH_BANK_1: Securable memory in Bank1
   *            @arg FLASH_BANK_2: Securable memory in Bank2 (*)
-  * @note   (*) availability Depends on devices
+  * @note   (*) availability depends on devices
   * @param[out]  SecSize specifies the number of pages used in the securable
                  memory area of the bank.
   * @retval None
@@ -1315,7 +1315,7 @@ static uint32_t FLASH_OB_GetRDP(void)
   *         @ref FLASH_OB_USER_nBOOT1, @ref FLASH_OB_USER_SRAM_PE,
   *         @ref FLASH_OB_USER_CCMSRAM_RST, @ref OB_USER_nSWBOOT0,@ref FLASH_OB_USER_nBOOT0,
   *         @ref FLASH_OB_USER_NRST_MODE, @ref FLASH_OB_USER_INTERNAL_RESET_HOLDER
-  * @note  (*) availability Depends on devices
+  * @note  (*) availability depends on devices
   */
 static uint32_t FLASH_OB_GetUser(void)
 {

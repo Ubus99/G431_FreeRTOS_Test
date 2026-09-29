@@ -457,7 +457,7 @@ void HAL_FLASH_IRQHandler(void)
 
 /**
   * @brief  FLASH end of operation interrupt callback.
-  * @param  ReturnValue The value saved in this parameter Depends on the ongoing procedure:
+  * @param  ReturnValue The value saved in this parameter depends on the ongoing procedure:
   *           @arg Mass Erase: Bank number which has been requested to erase
   *           @arg Page Erase: Page which has been erased
   *                            (if 0xFFFFFFFF, it means that all the selected pages have been erased)
@@ -476,7 +476,7 @@ __weak void HAL_FLASH_EndOfOperationCallback(uint32_t ReturnValue)
 
 /**
   * @brief  FLASH operation error interrupt callback.
-  * @param  ReturnValue The value saved in this parameter Depends on the ongoing procedure:
+  * @param  ReturnValue The value saved in this parameter depends on the ongoing procedure:
   *           @arg Mass Erase: Bank number which has been requested to erase
   *           @arg Page Erase: Page number which returned an error
   *           @arg Program: Address which was selected for data program

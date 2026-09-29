@@ -866,7 +866,7 @@ TaskHandle_t xTimerGetTimerDaemonTaskHandle( void ) PRIVILEGED_FUNCTION;
  *     if( xHigherPriorityTaskWoken != pdFALSE )
  *     {
  *         // Call the interrupt safe yield function here (actual function
- *         // Depends on the FreeRTOS port being used).
+ *         // depends on the FreeRTOS port being used).
  *     }
  * }
  * @endverbatim
@@ -929,7 +929,7 @@ TaskHandle_t xTimerGetTimerDaemonTaskHandle( void ) PRIVILEGED_FUNCTION;
  *     if( xHigherPriorityTaskWoken != pdFALSE )
  *     {
  *         // Call the interrupt safe yield function here (actual function
- *         // Depends on the FreeRTOS port being used).
+ *         // depends on the FreeRTOS port being used).
  *     }
  * }
  * @endverbatim
@@ -1002,7 +1002,7 @@ TaskHandle_t xTimerGetTimerDaemonTaskHandle( void ) PRIVILEGED_FUNCTION;
  *     if( xHigherPriorityTaskWoken != pdFALSE )
  *     {
  *         // Call the interrupt safe yield function here (actual function
- *         // Depends on the FreeRTOS port being used).
+ *         // depends on the FreeRTOS port being used).
  *     }
  * }
  * @endverbatim
@@ -1088,7 +1088,7 @@ TaskHandle_t xTimerGetTimerDaemonTaskHandle( void ) PRIVILEGED_FUNCTION;
  *     if( xHigherPriorityTaskWoken != pdFALSE )
  *     {
  *         // Call the interrupt safe yield function here (actual function
- *         // Depends on the FreeRTOS port being used).
+ *         // depends on the FreeRTOS port being used).
  *     }
  * }
  * @endverbatim

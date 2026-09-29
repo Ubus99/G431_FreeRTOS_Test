@@ -645,7 +645,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB ) PRIVILEGED_FUNCTION;
 
 		if( ( pxTaskDefinition->puxStackBuffer != NULL ) && ( pxTaskDefinition->pxTaskBuffer != NULL ) )
 		{
-			/* Allocate space for the TCB.  Where the memory comes from Depends
+			/* Allocate space for the TCB.  Where the memory comes from depends
 			on the implementation of the port malloc function and whether or
 			not static allocation is being used. */
 			pxNewTCB = ( TCB_t * ) pxTaskDefinition->pxTaskBuffer;
@@ -690,7 +690,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB ) PRIVILEGED_FUNCTION;
 
 		if( pxTaskDefinition->puxStackBuffer != NULL )
 		{
-			/* Allocate space for the TCB.  Where the memory comes from Depends
+			/* Allocate space for the TCB.  Where the memory comes from depends
 			on the implementation of the port malloc function and whether or
 			not static allocation is being used. */
 			pxNewTCB = ( TCB_t * ) pvPortMalloc( sizeof( TCB_t ) );
@@ -745,7 +745,7 @@ static void prvAddNewTaskToReadyList( TCB_t *pxNewTCB ) PRIVILEGED_FUNCTION;
 		the TCB then the stack. */
 		#if( portSTACK_GROWTH > 0 )
 		{
-			/* Allocate space for the TCB.  Where the memory comes from Depends on
+			/* Allocate space for the TCB.  Where the memory comes from depends on
 			the implementation of the port malloc function and whether or not static
 			allocation is being used. */
 			pxNewTCB = ( TCB_t * ) pvPortMalloc( sizeof( TCB_t ) );
@@ -855,7 +855,7 @@ UBaseType_t x;
 	}
 	#endif /* tskSET_NEW_STACKS_TO_KNOWN_VALUE */
 
-	/* Calculate the top of stack address.  This Depends on whether the stack
+	/* Calculate the top of stack address.  This depends on whether the stack
 	grows from high memory to low (as per the 80x86) or vice versa.
 	portSTACK_GROWTH is used to make the result positive or negative as required
 	by the port. */

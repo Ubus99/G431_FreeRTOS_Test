@@ -17,7 +17,7 @@ typedef enum {
 
 typedef struct {
   COMEventType_t type;
-  const char     payload[COM_EVENT_PAYLOAD_MAX_LENGTH];
+  char           payload[COM_EVENT_PAYLOAD_MAX_LENGTH];
   size_t         length;
 } COMEvent_t;
 

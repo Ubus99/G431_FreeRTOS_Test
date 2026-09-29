@@ -714,7 +714,7 @@ void vTaskDelete( TaskHandle_t xTaskToDelete ) PRIVILEGED_FUNCTION;
  * <pre>void vTaskDelay( const TickType_t xTicksToDelay );</pre>
  *
  * Delay a task for a given number of ticks.  The actual time that the
- * task remains blocked Depends on the tick rate.  The constant
+ * task remains blocked depends on the tick rate.  The constant
  * portTICK_PERIOD_MS can be used to calculate real time from the tick
  * rate - with the resolution of one tick period.
  *
@@ -1704,7 +1704,7 @@ void vTaskList( char * pcWriteBuffer ) PRIVILEGED_FUNCTION; /*lint !e971 Unquali
  *
  * Setting configGENERATE_RUN_TIME_STATS to 1 will result in a total
  * accumulated execution time being stored for each task.  The resolution
- * of the accumulated time value Depends on the frequency of the timer
+ * of the accumulated time value depends on the frequency of the timer
  * configured by the portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() macro.
  * Calling vTaskGetRunTimeStats() writes the total execution time of each
  * task into a buffer, both as an absolute count value and as a percentage
@@ -1755,7 +1755,7 @@ void vTaskGetRunTimeStats( char *pcWriteBuffer ) PRIVILEGED_FUNCTION; /*lint !e9
 *
 * Setting configGENERATE_RUN_TIME_STATS to 1 will result in a total
 * accumulated execution time being stored for each task.  The resolution
-* of the accumulated time value Depends on the frequency of the timer
+* of the accumulated time value depends on the frequency of the timer
 * configured by the portCONFIGURE_TIMER_FOR_RUN_TIME_STATS() macro.
 * While uxTaskGetSystemState() and vTaskGetRunTimeStats() writes the total
 * execution time of each task into a buffer, ulTaskGetIdleRunTimeCounter()
@@ -1810,7 +1810,7 @@ uint32_t ulTaskGetIdleRunTimeCounter( void ) PRIVILEGED_FUNCTION;
  * xTaskGetCurrentTaskHandle().
  *
  * @param ulValue Data that can be sent with the notification.  How the data is
- * used Depends on the value of the eAction parameter.
+ * used depends on the value of the eAction parameter.
  *
  * @param eAction Specifies how the notification updates the task's notification
  * value, if at all.  Valid values for eAction are as follows:
@@ -1896,7 +1896,7 @@ BaseType_t xTaskGenericNotify( TaskHandle_t xTaskToNotify, uint32_t ulValue, eNo
  * xTaskGetCurrentTaskHandle().
  *
  * @param ulValue Data that can be sent with the notification.  How the data is
- * used Depends on the value of the eAction parameter.
+ * used depends on the value of the eAction parameter.
  *
  * @param eAction Specifies how the notification updates the task's notification
  * value, if at all.  Valid values for eAction are as follows:

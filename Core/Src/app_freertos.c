@@ -19,10 +19,9 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "FreeRTOS.h"
-#include "cmsis_os.h"
-#include "main.h"
 #include "task.h"
-#include "usart.h"
+#include "main.h"
+#include "cmsis_os.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -51,23 +50,29 @@
 
 /* USER CODE END Variables */
 /* Definitions for COMTask */
-osThreadId_t         COMTaskHandle;
+osThreadId_t COMTaskHandle;
 const osThreadAttr_t COMTask_attributes = {
-    .name       = "COMTask",
-    .priority   = (osPriority_t)osPriorityAboveNormal,
-    .stack_size = 128 * 4};
+  .name = "COMTask",
+  .priority = (osPriority_t) osPriorityAboveNormal,
+  .stack_size = 128 * 4
+};
 /* Definitions for ParserTask */
-osThreadId_t         ParserTaskHandle;
+osThreadId_t ParserTaskHandle;
 const osThreadAttr_t ParserTask_attributes = {
-    .name       = "ParserTask",
-    .priority   = (osPriority_t)osPriorityNormal,
-    .stack_size = 128 * 4};
+  .name = "ParserTask",
+  .priority = (osPriority_t) osPriorityNormal,
+  .stack_size = 350 * 4
+};
 /* Definitions for COMRxQueue */
-osMessageQueueId_t         COMRxQueueHandle;
-const osMessageQueueAttr_t COMRxQueue_attributes = {.name = "COMRxQueue"};
+osMessageQueueId_t COMRxQueueHandle;
+const osMessageQueueAttr_t COMRxQueue_attributes = {
+  .name = "COMRxQueue"
+};
 /* Definitions for COMEventQueue */
-osMessageQueueId_t         COMEventQueueHandle;
-const osMessageQueueAttr_t COMEventQueue_attributes = {.name = "COMEventQueue"};
+osMessageQueueId_t COMEventQueueHandle;
+const osMessageQueueAttr_t COMEventQueue_attributes = {
+  .name = "COMEventQueue"
+};
 
 /* Private function prototypes -----------------------------------------------*/
 /* USER CODE BEGIN FunctionPrototypes */
@@ -80,7 +85,7 @@ void StartParserTask(void *argument);
 void MX_FREERTOS_Init(void); /* (MISRA C 2004 rule 8.1) */
 
 /* Hook prototypes */
-void          configureTimerForRunTimeStats(void);
+void configureTimerForRunTimeStats(void);
 unsigned long getRunTimeCounterValue(void);
 void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName);
 
@@ -101,10 +106,10 @@ void vApplicationStackOverflowHook(xTaskHandle xTask, signed char *pcTaskName) {
 /* USER CODE END 4 */
 
 /**
- * @brief  FreeRTOS initialization
- * @param  None
- * @retval None
- */
+  * @brief  FreeRTOS initialization
+  * @param  None
+  * @retval None
+  */
 void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN Init */
 
@@ -124,12 +129,10 @@ void MX_FREERTOS_Init(void) {
 
   /* Create the queue(s) */
   /* creation of COMRxQueue */
-  COMRxQueueHandle =
-      osMessageQueueNew(16, sizeof(COMEvent_t), &COMRxQueue_attributes);
+  COMRxQueueHandle = osMessageQueueNew (16, sizeof(COMEvent_t), &COMRxQueue_attributes);
 
   /* creation of COMEventQueue */
-  COMEventQueueHandle =
-      osMessageQueueNew(16, sizeof(COMEvent_t), &COMEventQueue_attributes);
+  COMEventQueueHandle = osMessageQueueNew (16, sizeof(COMEvent_t), &COMEventQueue_attributes);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -149,6 +152,7 @@ void MX_FREERTOS_Init(void) {
   /* USER CODE BEGIN RTOS_EVENTS */
   /* add events, ... */
   /* USER CODE END RTOS_EVENTS */
+
 }
 
 /* USER CODE BEGIN Header_StartCOMTask */
@@ -158,7 +162,8 @@ void MX_FREERTOS_Init(void) {
  * @retval None
  */
 /* USER CODE END Header_StartCOMTask */
-void StartCOMTask(void *argument) {
+void StartCOMTask(void *argument)
+{
   /* USER CODE BEGIN StartCOMTask */
   COMTaskInit();
 
@@ -176,7 +181,8 @@ void StartCOMTask(void *argument) {
  * @retval None
  */
 /* USER CODE END Header_StartParserTask */
-void StartParserTask(void *argument) {
+void StartParserTask(void *argument)
+{
   /* USER CODE BEGIN StartParserTask */
   ParserTaskInit();
   /* Infinite loop */
@@ -190,3 +196,4 @@ void StartParserTask(void *argument) {
 /* USER CODE BEGIN Application */
 
 /* USER CODE END Application */
+

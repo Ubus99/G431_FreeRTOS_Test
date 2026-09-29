@@ -54,7 +54,7 @@ extern "C" {
 /** @defgroup USARTEx_Slave_Select_management USARTEx Slave Select Management
   * @{
   */
-#define USART_NSS_HARD                        0x00000000U          /*!< SPI slave selection Depends on NSS input pin              */
+#define USART_NSS_HARD                        0x00000000U          /*!< SPI slave selection depends on NSS input pin              */
 #define USART_NSS_SOFT                        USART_CR2_DIS_NSS    /*!< SPI slave is always selected and NSS input pin is ignored */
 /**
   * @}

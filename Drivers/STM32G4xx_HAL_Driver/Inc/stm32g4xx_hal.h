@@ -348,7 +348,7 @@ extern "C" {
   *           @arg @ref SYSCFG_BOOT_FMC (*)
   *           @arg @ref SYSCFG_BOOT_QUADSPI (*)
   *           @arg @ref SYSCFG_BOOT_SRAM
-  * @note   (*) availability Depends on devices
+  * @note   (*) availability depends on devices
   */
 #define __HAL_SYSCFG_GET_BOOT_MODE()           READ_BIT(SYSCFG->MEMRMP, SYSCFG_MEMRMP_MEM_MODE)
 

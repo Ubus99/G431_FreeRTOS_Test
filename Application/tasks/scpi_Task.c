@@ -40,14 +40,14 @@ osStatus_t ParserTaskLoop(void) {
   if (result == 0) {
     return osError;
   }
-  // osDelay(1);
+  osDelay(1);
   return osOK;
 }
 
 size_t SCPI_Write(scpi_t *scpi, const char *data, size_t len) {
   (void)scpi;
-  const COMEvent_t message = {
-      .type = COM_TX_MESSAGE, .payload = {*data}, .length = len};
+  const COMEvent_t message = {.type = COM_TX_MESSAGE, .length = len};
+  memcpy((void *)message.payload, data, len);
   return osMessageQueuePut(COMEventQueueHandle, &message, 0, osWaitForever);
 }
 
