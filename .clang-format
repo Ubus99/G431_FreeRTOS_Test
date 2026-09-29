@@ -1,0 +1,13 @@
+---
+BasedOnStyle: LLVM
+AlignAfterOpenBracket: AlwaysBreak
+AlignConsecutiveAssignments:
+  Enabled: true
+  AcrossEmptyLines: true
+AlignConsecutiveBitFields:
+  Enabled: true
+AlignConsecutiveDeclarations:
+  Enabled: true
+BinPackArguments: false
+BinPackParameters: OnePerLine
+Language: Cpp
