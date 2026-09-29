@@ -39,7 +39,9 @@ osStatus_t ParserTaskLoop(void) {
   osMessageQueuePut(COMEventQueueHandle, &rxMsg, 0, osWaitForever);
   */
   osMessageQueueGet(COMRxQueueHandle, &rxMsg, 0, osWaitForever);
-  if (SCPI_Input(&scpi_context, rxMsg.payload, (int)rxMsg.length) == 0) {
+  volatile scpi_bool_t result =
+      SCPI_Input(&scpi_context, rxMsg.payload, (int)rxMsg.length);
+  if (result == 0) {
     return osError;
   }
   osDelay(1);
@@ -49,7 +51,7 @@ osStatus_t ParserTaskLoop(void) {
 size_t SCPI_Write(scpi_t *scpi, const char *data, size_t len) {
   (void)scpi;
   const COMEvent_t message = {
-      .type = COM_TX_MESSAGE, .payload = *data, .length = len};
+      .type = COM_TX_MESSAGE, .payload = {*data}, .length = len};
   return osMessageQueuePut(COMEventQueueHandle, &message, 0, osWaitForever);
 }
 

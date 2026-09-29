@@ -8,30 +8,45 @@ set(SCPI_ARCHIVE "${SCPI_BUILD_DIR}/dist/libscpi.a")
 
 find_program(SCPI_MAKE_EXECUTABLE NAMES make gmake REQUIRED)
 
+# Keep the external Makefile build aligned with the flags applied to the main
+# target, including configuration-specific optimization and debug settings.
+set(SCPI_CFLAGS "${CMAKE_C_FLAGS}")
+if (CMAKE_BUILD_TYPE)
+    if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+        string(APPEND SCPI_CFLAGS " ${CMAKE_C_FLAGS_DEBUG}")
+    elseif (CMAKE_BUILD_TYPE STREQUAL "Release")
+        string(APPEND SCPI_CFLAGS " ${CMAKE_C_FLAGS_RELEASE}")
+    elseif (CMAKE_BUILD_TYPE STREQUAL "RelWithDebInfo")
+        string(APPEND SCPI_CFLAGS " ${CMAKE_C_FLAGS_RELWITHDEBINFO}")
+    elseif (CMAKE_BUILD_TYPE STREQUAL "MinSizeRel")
+        string(APPEND SCPI_CFLAGS " ${CMAKE_C_FLAGS_MINSIZEREL}")
+    endif ()
+endif ()
+
 ExternalProject_Add(scpi-parser-build
-    GIT_REPOSITORY https://github.com/j123b567/scpi-parser.git
-    GIT_TAG v2.3
-    SOURCE_DIR "${SCPI_SOURCE_DIR}"
-    CONFIGURE_COMMAND ""
-    BUILD_IN_SOURCE TRUE
-    # The upstream Makefile's "static" target creates libscpi.a. Run it from
-    # libscpi because that is where the Makefile and its source files live.
-    # CMake's compiler variables are passed as environment variables because
-    # the Makefile reads CC, AR, and RANLIB rather than CMake target settings.
-    # CFLAGS combines the toolchain's common flags with the active
-    # configuration flags (for example, -Og -g3 for Debug).
-    BUILD_COMMAND
+        GIT_REPOSITORY https://github.com/j123b567/scpi-parser.git
+        GIT_TAG v2.3
+        SOURCE_DIR "${SCPI_SOURCE_DIR}"
+        CONFIGURE_COMMAND ""
+        BUILD_IN_SOURCE TRUE
+        # The upstream Makefile's "static" target creates libscpi.a. Run it from
+        # libscpi because that is where the Makefile and its source files live.
+        # CMake's compiler variables are passed as environment variables because
+        # the Makefile reads CC, AR, and RANLIB rather than CMake target settings.
+        # CFLAGS combines the toolchain's common flags with the active
+        # configuration flags (for example, -Og -g3 for Debug).
+        BUILD_COMMAND
         ${CMAKE_COMMAND} -E env
         "CC=${CMAKE_C_COMPILER}"
         "AR=${CMAKE_AR}"
         "RANLIB=${CMAKE_RANLIB}"
-        "CFLAGS=${CMAKE_C_FLAGS} ${CMAKE_C_FLAGS_${CMAKE_BUILD_TYPE}}"
+        "CFLAGS=${SCPI_CFLAGS}"
         ${SCPI_MAKE_EXECUTABLE}
         -C "${SCPI_BUILD_DIR}"
         static
-    BUILD_BYPRODUCTS "${SCPI_ARCHIVE}"
-    INSTALL_COMMAND ""
-    TEST_COMMAND ""
+        BUILD_BYPRODUCTS "${SCPI_ARCHIVE}"
+        INSTALL_COMMAND ""
+        TEST_COMMAND ""
 )
 
 # ExternalProject_Add creates a build-step target, not a linkable library.
@@ -41,7 +56,7 @@ ExternalProject_Add(scpi-parser-build
 # immediately for imported targets.
 add_library(scpi-parser STATIC IMPORTED GLOBAL)
 set_target_properties(scpi-parser PROPERTIES
-    IMPORTED_LOCATION "${SCPI_ARCHIVE}"
-    INTERFACE_COMPILE_OPTIONS "-I${SCPI_BUILD_DIR}/inc"
+        IMPORTED_LOCATION "${SCPI_ARCHIVE}"
+        INTERFACE_COMPILE_OPTIONS "-I${SCPI_BUILD_DIR}/inc"
 )
 add_dependencies(scpi-parser scpi-parser-build)
