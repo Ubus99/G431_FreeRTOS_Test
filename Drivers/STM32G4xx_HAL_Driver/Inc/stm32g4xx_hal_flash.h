@@ -82,7 +82,7 @@ typedef struct
                                 @ref FLASH_OB_USER_WWDG_SW, @ref FLASH_OB_USER_BFB2 (*),
                                 @ref FLASH_OB_USER_nBOOT1, @ref FLASH_OB_USER_SRAM_PE,
                                 @ref FLASH_OB_USER_CCMSRAM_RST
-                                @note (*) availability depends on devices */
+                                @note (*) availability Depends on devices */
   uint32_t PCROPConfig;    /*!< Configuration of the PCROP (used for OPTIONBYTE_PCROP).
                                 This parameter must be a combination of @ref FLASH_Banks (except FLASH_BANK_BOTH)
                                 and @ref FLASH_OB_PCROP_RDP */
@@ -98,7 +98,7 @@ typedef struct
                                 This parameter can be one of the following values:
                                 FLASH_BANK_1: Securable memory area to be programmed in bank 1
                                 FLASH_BANK_2: Securable memory area to be programmed in bank 2 (*)
-                                @note (*) availability depends on devices */
+                                @note (*) availability Depends on devices */
   uint32_t SecSize;        /*!< Size of securable memory area to be programmed (used for OPTIONBYTE_SEC),
                                 in number of pages. Securable memory area is starting from first page of the bank.
                                 Only one securable memory could be programmed at the same time.
@@ -755,7 +755,7 @@ typedef struct
   *     @arg FLASH_FLAG_ECCD: FLASH two ECC errors have been detected in 64 LSB bits
   *     @arg FLASH_FLAG_ECCC2(*): FLASH one ECC error has been detected and corrected in 64 MSB bits (mode 128 bits only)
   *     @arg FLASH_FLAG_ECCD2(*): FLASH two ECC errors have been detected in 64 MSB bits (mode 128 bits only)
-  * @note  (*) availability depends on devices
+  * @note  (*) availability Depends on devices
   * @retval The new state of FLASH_FLAG (SET or RESET).
   */
 #define __HAL_FLASH_GET_FLAG(__FLAG__)          ((((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) ? \
@@ -783,7 +783,7 @@ typedef struct
   *     @arg FLASH_FLAG_ECCD2(*): FLASH two ECC errors have been detected in 64 MSB bits (mode 128 bits only)
   *     @arg FLASH_FLAG_SR_ERRORS: FLASH All SR errors flags
   *     @arg FLASH_FLAG_ECCR_ERRORS: FLASH All ECCR errors flags
-  * @note  (*) availability depends on devices
+  * @note  (*) availability Depends on devices
   * @retval None
   */
 #define __HAL_FLASH_CLEAR_FLAG(__FLAG__)        do { if(((__FLAG__) & FLASH_FLAG_ECCR_ERRORS) != 0U) { SET_BIT(FLASH->ECCR, ((__FLAG__) & FLASH_FLAG_ECCR_ERRORS)); }\

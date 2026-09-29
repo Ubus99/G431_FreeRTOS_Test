@@ -257,7 +257,7 @@ HAL_StatusTypeDef HAL_USARTEx_DisableSlaveMode(USART_HandleTypeDef *husart)
   * @brief  Configure the Slave Select input pin (NSS).
   * @note Software NSS management: SPI slave will always be selected and NSS
   *       input pin will be ignored.
-  * @note Hardware NSS management: the SPI slave selection depends on NSS
+  * @note Hardware NSS management: the SPI slave selection Depends on NSS
   *       input pin. The slave is selected when NSS is low and deselected when
   *       NSS is high.
   * @param husart      USART handle.

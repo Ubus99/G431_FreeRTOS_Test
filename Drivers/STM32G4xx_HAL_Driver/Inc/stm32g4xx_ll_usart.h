@@ -2393,7 +2393,7 @@ __STATIC_INLINE uint32_t LL_USART_IsEnabledSPISlave(const USART_TypeDef *USARTx)
   * @brief  Enable SPI Slave Selection using NSS input pin
   * @note   Macro IS_UART_SPI_SLAVE_INSTANCE(USARTx) can be used to check whether or not
   *         SPI Slave mode feature is supported by the USARTx instance.
-  * @note   SPI Slave Selection depends on NSS input pin
+  * @note   SPI Slave Selection Depends on NSS input pin
   *         (The slave is selected when NSS is low and deselected when NSS is high).
   * @rmtoll CR2          DIS_NSS       LL_USART_EnableSPISlaveSelect
   * @param  USARTx USART Instance
@@ -2419,7 +2419,7 @@ __STATIC_INLINE void LL_USART_DisableSPISlaveSelect(USART_TypeDef *USARTx)
 }
 
 /**
-  * @brief  Indicate if  SPI Slave Selection depends on NSS input pin
+  * @brief  Indicate if  SPI Slave Selection Depends on NSS input pin
   * @note   Macro IS_UART_SPI_SLAVE_INSTANCE(USARTx) can be used to check whether or not
   *         SPI Slave mode feature is supported by the USARTx instance.
   * @rmtoll CR2          DIS_NSS       LL_USART_IsEnabledSPISlaveSelect

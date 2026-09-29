@@ -503,7 +503,7 @@ function(conan_install)
         message(FATAL_ERROR "Conan install failed='${return_code}'")
     endif()
 
-    # the files are generated in a folder that depends on the layout used, if
+    # the files are generated in a folder that Depends on the layout used, if
     # one is specified, but we don't know a priori where this is.
     # TODO: this can be made more robust if Conan can provide this in the json output
     string(JSON conan_generators_folder GET "${conan_stdout}" graph nodes 0 generators_folder)
